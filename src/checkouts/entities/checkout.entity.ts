@@ -41,7 +41,7 @@ export class Checkout {
   created_at: Date;
 
   @OneToMany(() => CheckoutItem, (item) => item.checkout, {
-    cascade: ['insert'],
+    cascade: ['insert'], eager: true
   })
   items: CheckoutItem[];
 
@@ -100,6 +100,6 @@ export class CheckoutItem {
   @ManyToMany(() => Checkout)
   checkout: Checkout;
 
-  @ManyToMany(() => Checkout, { cascade: ['insert'] })
+  @ManyToMany(() => Checkout, { cascade: ['insert'], eager: true })
   product: CheckoutProduct;
 }
