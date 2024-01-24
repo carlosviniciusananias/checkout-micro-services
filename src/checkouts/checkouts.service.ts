@@ -59,14 +59,26 @@ export class CheckoutsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} checkout`;
+    return this.checkoutRepo.findOneByOrFail({
+      id,
+    })
   }
 
-  update(id: number, updateCheckoutDto: UpdateCheckoutDto) {
-    return `This action updates a #${id} checkout`;
+  async pay(id: number) {
+    const checkout = await this.checkoutRepo.findOneByOrFail({
+      id
+    })
+    checkout.pay()
+
+    return this.checkoutRepo.save(checkout)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} checkout`;
+  async fail(id: number) {
+    const checkout = await this.checkoutRepo.findOneByOrFail({
+      id
+    })
+    checkout.fail()
+
+    return this.checkoutRepo.save(checkout)
   }
 }
