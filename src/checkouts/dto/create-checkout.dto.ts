@@ -1,5 +1,6 @@
+import { Type } from 'class-transformer';
 import {
-    ArrayNotEmpty,
+  ArrayNotEmpty,
   IsArray,
   IsInt,
   IsNotEmpty,
@@ -26,5 +27,6 @@ export class CreateCheckoutDto {
   @IsArray()
   @IsNotEmpty()
   @ValidateNested({ each: true })
+  @Type(() => CheckoutItemDto)
   items: CheckoutItemDto[];
 }
